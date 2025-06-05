@@ -4,18 +4,35 @@ This document summarizes the work accomplished on setting up GCP resources using
 
 ## Accomplished Tasks:
 
-We have successfully set up the foundational Terraform structure and defined resources for the following GCP services:
+We have successfully:
 
-1.  **Initial Terraform Setup:** Created core configuration files (`main.tf`, `variables.tf`, `terraform.tfvars.example`, `README.md`).
-2.  **GCS Bucket:** Defined a Google Cloud Storage bucket with versioning and lifecycle rules.
-3.  **Cloud SQL:** Configured a Cloud SQL instance (PostgreSQL), database, and user. Debugged and resolved configuration issues.
-4.  **BigQuery Dataset:** Added a BigQuery dataset resource.
-5.  **Dataproc Cluster:** Defined a Dataproc cluster, configured to use the GCS bucket for staging.
-6.  **Security & `.cursorignore`:** Created a `.cursorignore` file to prevent sensitive files and Terraform state from being tracked.
-7.  **Modularization:** Refactored the configuration into reusable modules for GCS, Cloud SQL, BigQuery, and Dataproc, improving organization and maintainability.
-8.  **IAM and Service Account:** Created a dedicated IAM module to provision a service account with specific, limited permissions (GCS read/manage, BigQuery write, Dataproc Worker) for the Dataproc cluster.
-9.  **Module Integration:** Integrated the new IAM module and updated the Dataproc module to use the dedicated service account.
-10. **Outputs:** Created an `outputs.tf` file in the root to easily retrieve resource details after deployment.
+1.  Initialized the core Terraform project structure and files (`main.tf`, `variables.tf`, `terraform.tfvars.example`, `README.md`).
+2.  Set up a basic configuration for deploying a GCS bucket.
+3.  Created a `.cursorignore` file to manage ignored files for the Cursor IDE.
+4.  Handled the sensitive `terraform.tfvars` file by ensuring it's ignored and creating an example template.
+5.  Added resources and variables for a Cloud SQL instance, database, and user.
+6.  Debugged and corrected configuration issues related to Cloud SQL, including `tier` placement and the `host` argument for PostgreSQL users.
+7.  Reviewed the initial configuration files.
+8.  Added resources and variables for a BigQuery dataset.
+9.  Added resources and variables for a Dataproc cluster, configuring it to use the GCS bucket for staging.
+10. Created a root `outputs.tf` file and added output variables for key deployed resources.
+11. Modularized the configuration by creating separate modules for GCS, Cloud SQL, BigQuery, and Dataproc.
+12. Updated the root `main.tf` to call these modules and pass necessary variables.
+13. Updated the root `outputs.tf` to collect outputs from the modules and organized them for clarity.
+14. Created an `iam` module to manage service account creation and IAM bindings.
+15. Defined a service account resource within the `iam` module.
+16. Added specific IAM roles to the service account using dynamic bindings based on a variable list.
+17. Configured the Dataproc module to utilize the dedicated service account created by the `iam` module.
+18. Made the service account details (ID, display name, roles) configurable via variables in the root and passed to the `iam` module.
+19. Provided `terraform import` commands for importing existing GCS bucket, BigQuery dataset, and Service Account resources into the state.
+20. Set up a remote state backend using the created GCS bucket and a specified prefix, moving the state from local to remote.
+21. Discussed best practices for using remote backends, including state locking and versioning.
+22. Explained the difference between Git versioning and state file versioning.
+23. Confirmed that object versioning was enabled on the GCS state bucket via the code.
+24. Demonstrated and performed a state rollback to a previous version stored in GCS.
+25. Configured the `.gitignore` file with comprehensive patterns to prevent sensitive files and artifacts from being committed to Git.
+26. Created the `terraform.tfvars.example` file as a safe template for sensitive configurations.
+27. Verified that the files intended for Git commit do not contain hardcoded sensitive data, especially within the modules.
 
 ## Remaining Tasks:
 
