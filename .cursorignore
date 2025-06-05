@@ -1,0 +1,3 @@
+# Ignore service account key files and directory
+key/
+*.json
