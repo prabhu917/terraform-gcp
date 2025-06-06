@@ -31,4 +31,10 @@ module "iam" {
   service_account_id = var.service_account_id
   service_account_display_name = var.service_account_display_name
   service_account_roles = var.service_account_roles
+}
+
+module "vpc_network" {
+  source = "./modules/network"
+  network_name = var.network_name
+  project_id = var.project_id
 } 

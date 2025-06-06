@@ -109,4 +109,9 @@ variable "service_account_roles" {
     "roles/dataproc.worker",
     "roles/dataproc.serviceAgent"
   ]
+}
+
+variable "network_name" {
+  description = "The name of the VPC network to create"
+  type        = string
 } 
