@@ -1,0 +1,17 @@
+project_id                   = "silver-antonym-461502-t3"
+region                       = "us-central1"
+bucket_name                  = "terraform-sample-bucket-12049"
+credentials_file             = "C:\\Users\\prabh\\OneDrive\\Desktop\\projects\\key\\key.json"
+sql_instance_name            = "terraform-sql-instance"    # Choose a unique name for your SQL instance
+sql_database_version         = "POSTGRES_14"               # Or POSTGRES_14, etc.
+sql_tier                     = "db-f1-micro"               # Or a different tier
+sql_database_name            = "mydatabase"                # Or your desired database name
+sql_username                 = "my-user"                   # Choose a username for your SQL user
+sql_password                 = "password"                  # **IMPORTANT: Replace with a strong, unique password**
+bq_dataset_id                = "terraform_analysis_ataset" # Choose a unique ID for your BigQuery dataset
+dataproc_cluster_name        = "terraform-cluster-1"       # Choose a unique name for your Dataproc cluster
+dataproc_master_machine_type = "n1-standard-4"             # Or a different machine type
+dataproc_worker_machine_type = "n1-standard-4"             # Or a different machine type
+dataproc_worker_count        = 2                           # Or a different number of workers
+gcs_folder_name              = "terraform-remote-file"     # Replace with the name you want for your folder
+network_name                 = "sample-vpc-name" # Replace "your-desired-vpc-name" with the actual name you want
