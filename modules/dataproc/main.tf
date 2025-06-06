@@ -1,6 +1,6 @@
 resource "google_dataproc_cluster" "main_cluster" {
-  name     = var.dataproc_cluster_name
-  region   = var.region
+  name   = var.dataproc_cluster_name
+  region = var.region
 
   labels = {
     environment = "development"

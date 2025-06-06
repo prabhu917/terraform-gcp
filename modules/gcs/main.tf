@@ -20,8 +20,8 @@ resource "google_storage_bucket" "my_bucket" {
 }
 
 resource "google_storage_bucket_object" "data_folder" {
-  name   = "${var.gcs_folder_name}/"
-  bucket = google_storage_bucket.my_bucket.name
+  name    = "${var.gcs_folder_name}/"
+  bucket  = google_storage_bucket.my_bucket.name
   content = "placeholder"
   # We don't need content for a folder placeholder
 }

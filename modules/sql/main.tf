@@ -4,10 +4,10 @@ resource "google_sql_database_instance" "main_instance" {
   database_version = var.sql_database_version
 
   settings {
-    tier             = var.sql_tier
+    tier = var.sql_tier
     ip_configuration {
-      ipv4_enabled    = true
-      require_ssl     = true
+      ipv4_enabled = true
+      require_ssl  = true
       # Uncomment and configure authorized_networks if needed
       # authorized_networks {
       #   value = "0.0.0.0/0" # Replace with your IP range
@@ -15,7 +15,7 @@ resource "google_sql_database_instance" "main_instance" {
     }
 
     backup_configuration {
-      enabled = true
+      enabled            = true
       binary_log_enabled = false # Set to true for point-in-time recovery (MySQL only)
     }
 
