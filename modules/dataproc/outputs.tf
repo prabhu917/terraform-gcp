@@ -11,8 +11,8 @@ output "cluster_id" {
 output "cluster_config" {
   description = "The configuration of the Dataproc cluster"
   value = {
-    master_config = google_dataproc_cluster.main_cluster.cluster_config[0].master_config[0]
-    worker_config = google_dataproc_cluster.main_cluster.cluster_config[0].worker_config[0]
+    master_config   = google_dataproc_cluster.main_cluster.cluster_config[0].master_config[0]
+    worker_config   = google_dataproc_cluster.main_cluster.cluster_config[0].worker_config[0]
     software_config = google_dataproc_cluster.main_cluster.cluster_config[0].software_config[0]
   }
 }

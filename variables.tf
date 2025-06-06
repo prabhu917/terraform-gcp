@@ -101,7 +101,7 @@ variable "service_account_display_name" {
 variable "service_account_roles" {
   description = "List of IAM roles to assign to the service account"
   type        = list(string)
-  default     = [
+  default = [
     "roles/storage.objectViewer",
     "roles/storage.objectAdmin",
     "roles/bigquery.dataEditor",
@@ -109,4 +109,9 @@ variable "service_account_roles" {
     "roles/dataproc.worker",
     "roles/dataproc.serviceAgent"
   ]
+}
+
+variable "network_name" {
+  description = "The name of the VPC network to create"
+  type        = string
 } 

@@ -33,6 +33,12 @@ We have successfully:
 25. Configured the `.gitignore` file with comprehensive patterns to prevent sensitive files and artifacts from being committed to Git.
 26. Created the `terraform.tfvars.example` file as a safe template for sensitive configurations.
 27. Verified that the files intended for Git commit do not contain hardcoded sensitive data, especially within the modules.
+28. Set up a GitHub Actions CI/CD workflow for the Terraform code.
+29. Configured the CI/CD pipeline with separate jobs for `terraform plan` and `terraform apply`.
+30. Included steps for checking out code, setting up Terraform, authenticating to GCP, initializing Terraform, validating configuration, and formatting checks.
+31. Implemented saving the `terraform plan` output as an artifact.
+32. Configured the `terraform apply` step to run conditionally on the main branch and use the saved plan artifact.
+33. Discussed and configured the handling of sensitive variables and GCP credentials using GitHub Secrets for secure automation.
 
 ## Remaining Tasks:
 

@@ -61,4 +61,20 @@ output "project_id" {
 output "region" {
   description = "The GCP region where resources are deployed"
   value       = var.region
+}
+
+# Network Outputs
+output "network_name" {
+  description = "The name of the VPC network"
+  value       = module.vpc_network.network_name
+}
+
+output "network_self_link" {
+  description = "The self link of the VPC network"
+  value       = module.vpc_network.network_self_link
+}
+
+output "network_id" {
+  description = "The ID of the VPC network"
+  value       = module.vpc_network.network_id
 } 
