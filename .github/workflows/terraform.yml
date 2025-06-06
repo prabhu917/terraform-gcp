@@ -1,0 +1,82 @@
+# This workflow automates the Terraform workflow for your GCP infrastructure.
+
+name: Terraform CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Or your primary branch name
+  pull_request:
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Authenticate to GCP
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+    - name: Terraform Init
+      id: init
+      run: terraform init
+
+    - name: Terraform Format Check
+      run: terraform fmt -check -recursive
+
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
+
+    - name: Terraform Plan
+      id: plan_output
+      run: terraform plan -no-color -out=tfplan
+
+    - name: Upload Plan Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: terraform-plan-${{ github.sha }}
+        path: tfplan
+
+  apply:
+    runs-on: ubuntu-latest
+    needs: plan # Ensure the plan job completes successfully before running apply
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment: production # Or staging, depending on your environment name
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Authenticate to GCP
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+    - name: Terraform Init
+      id: init_apply
+      run: terraform init
+
+    - name: Download Plan Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: terraform-plan-${{ github.sha }}
+        path: .
+
+    - name: Terraform Apply
+      id: apply
+      run: terraform apply -auto-approve tfplan # Apply the saved plan
+      env:
+        TF_VAR_sql_password: ${{ secrets.TF_VAR_sql_password }}
+        # Add other sensitive variables here following the TF_VAR_ naming convention
+        TF_VAR_project_id: ${{ secrets.TF_VAR_project_id }} 
