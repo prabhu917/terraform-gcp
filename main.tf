@@ -38,3 +38,14 @@ module "vpc_network" {
   network_name = var.network_name
   project_id   = var.project_id
 } 
+
+output "debug_inputs" {
+  value = {
+    project_id                  = var.project_id
+    bucket_name                = var.bucket_name
+    bq_dataset_id              = var.bq_dataset_id
+    dataproc_cluster_name      = var.dataproc_cluster_name
+    service_account_id         = var.service_account_id
+    service_account_roles      = var.service_account_roles
+  }
+}
