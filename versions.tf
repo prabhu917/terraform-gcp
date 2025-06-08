@@ -4,7 +4,7 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "~> 5.0"  # More recent and compatible with current GCP features
+      version = "~> 5.0" # More recent and compatible with current GCP features
     }
   }
 }
